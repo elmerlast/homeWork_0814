@@ -211,29 +211,51 @@
 
             }
 
+            var currentIndex = -1;// 將記錄指標預設爲負數代表使用者尚未點選任何記錄
+
             $("#newItem").click(function(){
+                currentIndex = -1; // 使用者點選新增按鈕時將現在所指的記錄指標設定爲負數
                 $("#titleTextBox").val("");
                 $("#ymdTextBox").val("");
                 $("#newsModal").modal({ backdrop: "static"});
             })
 
-            $("#okButton").click(function (){
-                var newItem = {
-                    title: $("#titleTextBox").val(),
-                    ymd: $("#ymdTextBox").val()
-                };
-                $.ajax({
-                    type:"post",
-                    url:"/home/news",
-                    data: newItem
-                })
-                .then(function(e){
-                    $.get("/home/news", function(e){
-                        newList = JSON.parse(e);
-                        refreshNewsUI();
+            $("#okButton").click(function () {
+                if (currentIndex >= 0) { // 根據記錄指標判定此時在修改Box的狀態，執行此區域修改功能程式碼
+                    newsList[currentIndex].title = $("#titleTextBox").val();
+                    newsList[currentIndex].ymd = $("#ymdTextBox").val();
+                    refreshNewsUI();
+                    $("#newsModal").modal("hide");
+
+                    $.ajax({
+                        type: "put",
+                        url: "/home/news",
+                        data: newsList[currentIndex]
                     })
-                })
-                $("#newsModal").modal("hide");
+                        .then(function (e) {
+                            showToast(e);
+                        })
+                }
+                else {  // 根據記錄指標判定此時在新增Box的狀態，執行此區域新增功能程式碼
+                    var newItem = {
+                        title: $("#titleTextBox").val(),
+                        ymd: $("#ymdTextBox").val()
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: "/home/news",
+                        data: newItem
+                    })
+                        .then(function (e) {
+                            $.get("/home/news", function (e) {
+                                newsList = JSON.parse(e);
+                                refreshNewsUI();
+                            })
+                        })
+                    $("#newsModal").modal("hide");
+                }
+
+
             })
 
 
