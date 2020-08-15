@@ -25,3 +25,5 @@ insert into news (ymd, title) values
   ('2017-05-05', 'News E');
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+
+select * from news;
