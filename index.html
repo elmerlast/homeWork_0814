@@ -185,7 +185,11 @@
                 }
             }
 
-
+            $("#newItem").click(function(){
+                $("#titleTextBox").val("");
+                $("#ymdTextBox").val("");
+                $("#newsModal").modal({ backdrop: "static"});
+            })
 
 
 
