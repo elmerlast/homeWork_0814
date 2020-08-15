@@ -190,6 +190,25 @@
                 $("#ymdTextBox").val("");
                 $("#newsModal").modal({ backdrop: "static"});
             })
+            
+            $("#okButton").click(function (){
+                var newItem = {
+                    title: $("#titleTextBox").val(),
+                    ymd: $("#ymdTextBox").val()
+                };
+                $.ajax({
+                    type:"post",
+                    url:"/home/news",
+                    data: newItem
+                })
+                .then(function(e){
+                    $.get("/home/news", function(e){
+                        newList = JSON.parse(e);
+                        refreshNewsUI();
+                    })
+                })
+                $("#newsModal").modal("hide");
+            })
 
 
 
