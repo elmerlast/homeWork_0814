@@ -1,0 +1,28 @@
+-- 
+-- 建立資料庫labDB
+-- 
+drop database labDB;
+create database labDB default character set utf8;
+use labDB;
+
+-- 
+-- 建立news資料表
+-- 
+create table news
+(
+  newsId int auto_increment not null primary key,
+  ymd char(10),
+  title varchar(50)
+);
+
+-- 
+-- 新增news資料表記錄
+-- 
+insert into news (ymd, title) values 
+  ('2017-05-01', 'News A'),
+  ('2017-05-02', 'News B'),
+  ('2017-05-03', 'News C'),
+  ('2017-05-04', 'News D'),
+  ('2017-05-05', 'News E');
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
