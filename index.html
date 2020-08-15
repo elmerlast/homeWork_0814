@@ -200,6 +200,15 @@
                         })
                 })
 
+
+                $(".editItem").click(function () {
+                    var iIndex = $(this).closest("li").index();
+                    currentIndex = iIndex;
+                    $("#titleTextBox").val(newsList[iIndex].title);
+                    $("#ymdTextBox").val(newsList[iIndex].ymd);
+                    $("#newsModal").modal({ backdrop: "static" });
+                })
+
             }
 
             $("#newItem").click(function(){
