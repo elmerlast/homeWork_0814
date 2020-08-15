@@ -1,7 +1,6 @@
 -- 
 -- 建立資料庫labDB
 -- 
-drop database labDB;
 create database labDB default character set utf8;
 use labDB;
 
